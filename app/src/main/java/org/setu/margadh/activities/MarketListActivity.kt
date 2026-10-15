@@ -78,12 +78,12 @@ class MarketListActivity : AppCompatActivity() {
     private fun confirmDelete(market: MarketModel) {
         Timber.d("Asking to delete id=${market.id}")
         AlertDialog.Builder(this)
-            .setTitle("Delete market?")
-            .setMessage("\"${market.name}\" will be permanently removed.")
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(R.string.delete_title)
+            .setMessage(getString(R.string.delete_message, market.name))
+            .setPositiveButton(R.string.delete) { _, _ ->
                 deleteMarket(market)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 }

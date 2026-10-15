@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Margadh</string>
+
+    <!-- Main menu -->
+    <string name="view_markets">View Markets</string>
+    <string name="add_market">Add Market</string>
+
+    <!-- Market list -->
+    <string name="markets_title">Markets</string>
+    <string name="market_title_format">%1$d: %2$s</string>
+    <string name="market_details_format">%1$s | Open: %2$s</string>
+    <string name="market_coordinates_format">Lat: %1$s, Lng: %2$s</string>
+
+    <!-- Delete dialog -->
+    <string name="delete_title">Delete market?</string>
+    <string name="delete_message">\"%1$s\" will be permanently removed.</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Add / Edit form -->
+    <string name="edit_market">Edit Market</string>
+    <string name="hint_name">Market/Farm Name</string>
+    <string name="hint_county">County</string>
+    <string name="hint_days">Opening days (e.g. Sat 9am-2pm)</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_lat">Latitude (e.g. 52.2593)</string>
+    <string name="hint_lng">Longitude (e.g. -7.1101)</string>
+    <string name="save">Save</string>
+
+    <!-- Messages -->
+    <string name="error_name_required">Name is required</string>
+    <string name="error_invalid_number">Enter a valid number</string>
+    <string name="market_not_found">Market not found</string>
+    <string name="market_created">Market created</string>
+    <string name="market_updated">Market updated</string>
 </resources>

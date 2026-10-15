@@ -14,7 +14,7 @@
             android:id="@+id/formTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Market"
+            android:text="@string/add_market"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Market/Farm Name"
+            android:hint="@string/hint_name"
             android:inputType="text|textCapWords" />
 
         <EditText
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="County"
+            android:hint="@string/hint_county"
             android:inputType="text|textCapWords" />
 
         <EditText
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Opening days (e.g. Sat 9am-2pm)"
+            android:hint="@string/hint_days"
             android:inputType="text" />
 
         <EditText
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="top"
-            android:hint="Description"
+            android:hint="@string/hint_description"
             android:inputType="text|textMultiLine"
             android:minLines="3" />
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Latitude"
+            android:hint="@string/hint_lat"
             android:inputType="number|numberDecimal|numberSigned" />
 
         <EditText
@@ -65,14 +65,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Longitude"
+            android:hint="@string/hint_lng"
             android:inputType="number|numberDecimal|numberSigned" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/save"
             android:textSize="20sp" />
 
         <Button

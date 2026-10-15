@@ -48,7 +48,7 @@ class AddEditActivity : AppCompatActivity() {
         editingId = intent.getLongExtra("id", -1L)
 
         if (editingId != -1L) {
-            findViewById<TextView>(R.id.formTitle).text = "Edit Market"
+            findViewById<TextView>(R.id.formTitle).text = getString(R.string.edit_market)
             loadExistingMarket(editingId)
         }
     }
@@ -59,7 +59,7 @@ class AddEditActivity : AppCompatActivity() {
 
         if (market == null) {
             Timber.w("Market id=$id not found")
-            Toast.makeText(this, "Market not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.market_not_found, Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -78,7 +78,7 @@ class AddEditActivity : AppCompatActivity() {
 
         if (name.isEmpty()) {
             Timber.w("Save blocked: name empty")
-            nameInput.error = "Name is required"
+            nameInput.error = getString(R.string.error_name_required)
             return
         }
 
@@ -86,7 +86,7 @@ class AddEditActivity : AppCompatActivity() {
 
         if (lat == null) {
             Timber.w("Save blocked: invalid lat")
-            latInput.error = "Enter a valid number"
+            latInput.error = getString(R.string.error_invalid_number)
             return
         }
 
@@ -94,7 +94,7 @@ class AddEditActivity : AppCompatActivity() {
 
         if (lng == null) {
             Timber.w("Save blocked: invalid lng")
-            lngInput.error = "Enter a valid number"
+            lngInput.error = getString(R.string.error_invalid_number)
             return
         }
 
@@ -110,11 +110,11 @@ class AddEditActivity : AppCompatActivity() {
         if (editingId == -1L) {
             AppData.markets.create(market)
             Timber.i("Created market id=${market.id}, name=${market.name}")
-            Toast.makeText(this, "Market created", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.market_created, Toast.LENGTH_SHORT).show()
         } else {
             AppData.markets.update(market.copy(id = editingId))
             Timber.i("Updated market id=$editingId")
-            Toast.makeText(this, "Market updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.market_updated, Toast.LENGTH_SHORT).show()
         }
 
         finish()
