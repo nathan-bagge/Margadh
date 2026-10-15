@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import org.setu.margadh.AppData
 import org.setu.margadh.R
 import org.setu.margadh.models.MarketModel
+import timber.log.Timber
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -57,6 +58,7 @@ class AddEditActivity : AppCompatActivity() {
         val market = AppData.markets.findOne(id)
 
         if (market == null) {
+            Timber.w("Market id=$id not found")
             Toast.makeText(this, "Market not found", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -75,18 +77,23 @@ class AddEditActivity : AppCompatActivity() {
         val name = nameInput.text.toString().trim()
 
         if (name.isEmpty()) {
+            Timber.w("Save blocked: name empty")
             nameInput.error = "Name is required"
             return
         }
 
         val lat = latInput.text.toString().toDoubleOrNull()
+
         if (lat == null) {
+            Timber.w("Save blocked: invalid lat")
             latInput.error = "Enter a valid number"
             return
         }
 
         val lng = lngInput.text.toString().toDoubleOrNull()
+
         if (lng == null) {
+            Timber.w("Save blocked: invalid lng")
             lngInput.error = "Enter a valid number"
             return
         }
@@ -102,9 +109,11 @@ class AddEditActivity : AppCompatActivity() {
 
         if (editingId == -1L) {
             AppData.markets.create(market)
+            Timber.i("Created market id=${market.id}, name=${market.name}")
             Toast.makeText(this, "Market created", Toast.LENGTH_SHORT).show()
         } else {
             AppData.markets.update(market.copy(id = editingId))
+            Timber.i("Updated market id=$editingId")
             Toast.makeText(this, "Market updated", Toast.LENGTH_SHORT).show()
         }
 
