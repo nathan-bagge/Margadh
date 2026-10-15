@@ -3,7 +3,6 @@ package org.setu.margadh.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.margadh.R
@@ -11,8 +10,7 @@ import org.setu.margadh.models.MarketModel
 
 class MarketAdapter(
     private var markets: List<MarketModel>,
-    private val onEdit: (MarketModel) -> Unit,
-    private val onDelete: (MarketModel) -> Unit
+    private val listener: OnMarketListener
 ) : RecyclerView.Adapter<MarketAdapter.MarketViewHolder>() {
 
     class MarketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,8 +18,7 @@ class MarketAdapter(
         val detailsText: TextView = itemView.findViewById(R.id.detailsText)
         val descriptionText: TextView = itemView.findViewById(R.id.descriptionText)
         val coordinatesText: TextView = itemView.findViewById(R.id.coordinatesText)
-        val editButton: Button = itemView.findViewById(R.id.editButton)
-        val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
+
     }
 
     override fun onCreateViewHolder(
@@ -46,8 +43,8 @@ class MarketAdapter(
         holder.descriptionText.text = market.description
         holder.coordinatesText.text = "Lat: ${market.lat}, Lng: ${market.lng}"
 
-        holder.editButton.setOnClickListener { onEdit(market) }
-        holder.deleteButton.setOnClickListener { onDelete(market) }
+        holder.itemView.setOnClickListener { listener.onMarketClick(market) }
+        holder.itemView.setOnLongClickListener { listener.onMarketLongClick(market) }
     }
 
     override fun getItemCount(): Int = markets.size

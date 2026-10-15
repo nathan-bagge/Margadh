@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.setu.margadh.AppData
 import org.setu.margadh.adapters.MarketAdapter
 import org.setu.margadh.models.MarketModel
+import org.setu.margadh.adapters.OnMarketListener
 
 class MarketListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -31,8 +32,16 @@ class MarketListActivity : AppCompatActivity() {
 
         adapter = MarketAdapter(
             markets = AppData.markets.findAll(),
-            onEdit = { market -> editMarket(market) },
-            onDelete = { market -> deleteMarket(market) }
+            listener = object : OnMarketListener {
+                override fun onMarketClick(market: MarketModel) {
+                    editMarket(market)
+                }
+
+                override fun onMarketLongClick(market: MarketModel): Boolean {
+                    deleteMarket(market)
+                    return true
+                }
+            }
         )
 
         recyclerView.layoutManager = LinearLayoutManager(this)
