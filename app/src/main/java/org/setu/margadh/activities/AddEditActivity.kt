@@ -1,13 +1,16 @@
 package org.setu.margadh.activities
 
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import org.setu.margadh.AppData
+import org.setu.margadh.R
 import org.setu.margadh.models.MarketModel
 
 class AddEditActivity : AppCompatActivity() {
@@ -23,63 +26,30 @@ class AddEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_add_edit)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
-        createUserInterface()
+        nameInput = findViewById(R.id.nameInput)
+        countyInput = findViewById(R.id.countyInput)
+        daysInput = findViewById(R.id.daysInput)
+        descriptionInput = findViewById(R.id.descriptionInput)
+        latInput = findViewById(R.id.latInput)
+        lngInput = findViewById(R.id.lngInput)
+
+        findViewById<Button>(R.id.saveButton).setOnClickListener { saveMarket() }
+        findViewById<Button>(R.id.cancelButton).setOnClickListener { finish() }
 
         editingId = intent.getLongExtra("id", -1L)
 
         if (editingId != -1L) {
+            findViewById<TextView>(R.id.formTitle).text = "Edit Market"
             loadExistingMarket(editingId)
         }
-    }
-
-    private fun createUserInterface() {
-
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(32, 32, 32, 32)
-        }
-
-        nameInput = EditText(this).apply { hint = "Market name" }
-        countyInput = EditText(this).apply { hint = "County" }
-        daysInput = EditText(this).apply { hint = "Opening days (e.g. Sat 9am-2pm)" }
-        descriptionInput = EditText(this).apply { hint = "Description" }
-
-        // SIGNED lets you type a minus sign: Irish longitudes are negative
-        latInput = EditText(this).apply {
-            hint = "Latitude (e.g. 52.2593)"
-            inputType = InputType.TYPE_CLASS_NUMBER or
-                    InputType.TYPE_NUMBER_FLAG_DECIMAL or
-                    InputType.TYPE_NUMBER_FLAG_SIGNED
-        }
-
-        lngInput = EditText(this).apply {
-            hint = "Longitude (e.g. -7.1101)"
-            inputType = InputType.TYPE_CLASS_NUMBER or
-                    InputType.TYPE_NUMBER_FLAG_DECIMAL or
-                    InputType.TYPE_NUMBER_FLAG_SIGNED
-        }
-
-        val saveButton = Button(this).apply {
-            text = "Save"
-            setOnClickListener { saveMarket() }
-        }
-
-        val cancelButton = Button(this).apply {
-            text = "Cancel"
-            setOnClickListener { finish() }
-        }
-
-        root.addView(nameInput)
-        root.addView(countyInput)
-        root.addView(daysInput)
-        root.addView(descriptionInput)
-        root.addView(latInput)
-        root.addView(lngInput)
-        root.addView(saveButton)
-        root.addView(cancelButton)
-
-        setContentView(root)
     }
 
     private fun loadExistingMarket(id: Long) {
