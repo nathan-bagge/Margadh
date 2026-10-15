@@ -14,6 +14,7 @@ import org.setu.margadh.AppData
 import org.setu.margadh.adapters.MarketAdapter
 import org.setu.margadh.models.MarketModel
 import org.setu.margadh.adapters.OnMarketListener
+import androidx.appcompat.app.AlertDialog
 
 class MarketListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -38,7 +39,7 @@ class MarketListActivity : AppCompatActivity() {
                 }
 
                 override fun onMarketLongClick(market: MarketModel): Boolean {
-                    deleteMarket(market)
+                    confirmDelete(market)
                     return true
                 }
             }
@@ -68,5 +69,16 @@ class MarketListActivity : AppCompatActivity() {
     private fun deleteMarket(market: MarketModel) {
         AppData.markets.delete(market.id)
         adapter.updateMarkets(AppData.markets.findAll())
+    }
+
+    private fun confirmDelete(market: MarketModel) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete market?")
+            .setMessage("\"${market.name}\" will be permanently removed.")
+            .setPositiveButton("Delete") { _, _ ->
+                deleteMarket(market)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
