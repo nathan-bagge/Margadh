@@ -15,6 +15,7 @@ import org.setu.margadh.adapters.MarketAdapter
 import org.setu.margadh.models.MarketModel
 import org.setu.margadh.adapters.OnMarketListener
 import androidx.appcompat.app.AlertDialog
+import timber.log.Timber
 
 class MarketListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -57,10 +58,12 @@ class MarketListActivity : AppCompatActivity() {
         super.onResume()
         if (::adapter.isInitialized) {
             adapter.updateMarkets(AppData.markets.findAll())
+            Timber.d("Showing ${AppData.markets.findAll().size} markets")
         }
     }
 
     private fun editMarket(market: MarketModel) {
+        Timber.d("Editing market id=${market.id}, name=${market.name}")
         val intent = Intent(this, AddEditActivity::class.java)
         intent.putExtra("id", market.id)
         startActivity(intent)
@@ -68,10 +71,12 @@ class MarketListActivity : AppCompatActivity() {
 
     private fun deleteMarket(market: MarketModel) {
         AppData.markets.delete(market.id)
+        Timber.i("Deleted market id=${market.id}")
         adapter.updateMarkets(AppData.markets.findAll())
     }
 
     private fun confirmDelete(market: MarketModel) {
+        Timber.d("Asking to delete id=${market.id}")
         AlertDialog.Builder(this)
             .setTitle("Delete market?")
             .setMessage("\"${market.name}\" will be permanently removed.")

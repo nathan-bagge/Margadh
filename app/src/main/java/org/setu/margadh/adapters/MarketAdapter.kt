@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.margadh.R
 import org.setu.margadh.models.MarketModel
-
+import timber.log.Timber
 class MarketAdapter(
     private var markets: List<MarketModel>,
     private val listener: OnMarketListener
@@ -43,8 +43,14 @@ class MarketAdapter(
         holder.descriptionText.text = market.description
         holder.coordinatesText.text = "Lat: ${market.lat}, Lng: ${market.lng}"
 
-        holder.itemView.setOnClickListener { listener.onMarketClick(market) }
-        holder.itemView.setOnLongClickListener { listener.onMarketLongClick(market) }
+        holder.itemView.setOnClickListener{
+            Timber.d("Row tapped id=${market.id}")
+            listener.onMarketClick(market)
+        }
+        holder.itemView.setOnLongClickListener {
+            Timber.d("Row long-pressed id=${market.id}")
+            listener.onMarketLongClick(market)
+        }
     }
 
     override fun getItemCount(): Int = markets.size

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import org.setu.margadh.R
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,10 +23,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.viewMarketsButton).setOnClickListener {
+            Timber.i("View Markets clicked")
             startActivity(Intent(this, MarketListActivity::class.java))
         }
 
         findViewById<Button>(R.id.addMarketButton).setOnClickListener {
+            Timber.i("Add Market clicked")
             startActivity(Intent(this, AddEditActivity::class.java))
         }
     }

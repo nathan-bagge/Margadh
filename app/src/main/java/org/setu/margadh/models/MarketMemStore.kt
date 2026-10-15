@@ -1,6 +1,7 @@
 package org.setu.margadh.models
 
 import java.util.concurrent.atomic.AtomicLong
+import timber.log.Timber
 
 class MarketMemStore : MarketStore {
 
@@ -12,6 +13,7 @@ class MarketMemStore : MarketStore {
     override fun create(market: MarketModel) {
         market.id = lastId.incrementAndGet()
         markets.add(market)
+        Timber.d("Store: created id=${market.id}")
     }
 
     override fun update(market: MarketModel): Boolean {
@@ -25,7 +27,11 @@ class MarketMemStore : MarketStore {
         return true
     }
 
-    override fun delete(id: Long): Boolean = markets.removeIf { it.id == id }
+    override fun delete(id: Long): Boolean {
+        val removed = markets.removeIf { it.id == id }
+        Timber.d("Store: delete id=$id success=$removed")
+        return removed
+    }
 
     override fun findOne(id: Long): MarketModel? = markets.find { it.id == id }
 }
