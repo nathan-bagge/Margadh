@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="margadh_green">#2F5D3A</color>
+    <color name="margadh_green_light">#C8E0CC</color>
+    <color name="margadh_offwhite">#F5F1E8</color>
 </resources>
