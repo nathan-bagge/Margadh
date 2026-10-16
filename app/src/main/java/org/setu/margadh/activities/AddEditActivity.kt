@@ -13,12 +13,16 @@ import org.setu.margadh.R
 import org.setu.margadh.models.MarketModel
 import timber.log.Timber
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class AddEditActivity : AppCompatActivity() {
 
     private lateinit var nameInput: EditText
     private lateinit var countyInput: MaterialAutoCompleteTextView
-    private lateinit var daysInput: EditText
+
+    private lateinit var dayChips: ChipGroup
+    private lateinit var hoursInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var latInput: EditText
     private lateinit var lngInput: EditText
@@ -41,7 +45,8 @@ class AddEditActivity : AppCompatActivity() {
 
         nameInput = findViewById(R.id.nameInput)
         countyInput = findViewById(R.id.countyInput)
-        daysInput = findViewById(R.id.daysInput)
+        dayChips = findViewById(R.id.dayChips)
+        hoursInput = findViewById(R.id.hoursInput)
         descriptionInput = findViewById(R.id.descriptionInput)
         latInput = findViewById(R.id.latInput)
         lngInput = findViewById(R.id.lngInput)
@@ -62,6 +67,19 @@ class AddEditActivity : AppCompatActivity() {
         return true
     }
 
+    private fun selectedDays(): String =
+        (0 until dayChips.childCount)
+            .map { dayChips.getChildAt(it) as Chip }
+            .filter { it.isChecked }
+            .joinToString(", ") { it.text }
+
+    private fun selectDays(days: String) {
+        val chosen = days.split(", ")
+        for (i in 0 until dayChips.childCount) {
+            val chip = dayChips.getChildAt(i) as Chip
+            chip.isChecked = chip.text.toString() in chosen
+        }
+    }
     private fun loadExistingMarket(id: Long) {
 
         val market = AppData.markets.findOne(id)
@@ -75,7 +93,8 @@ class AddEditActivity : AppCompatActivity() {
 
         nameInput.setText(market.name)
         countyInput.setText(market.county, false) // false stops the dropdown from opening automatically when going to edit from the market list and filtering down to only the county that was previously entered
-        daysInput.setText(market.openingDays)
+        selectDays(market.openingDays)
+        hoursInput.setText(market.openingHours)
         descriptionInput.setText(market.description)
         latInput.setText(market.lat.toString())
         lngInput.setText(market.lng.toString())
@@ -110,7 +129,8 @@ class AddEditActivity : AppCompatActivity() {
         val market = MarketModel(
             name = name,
             county = countyInput.text.toString().trim(),
-            openingDays = daysInput.text.toString().trim(),
+            openingDays = selectedDays(),
+            openingHours = hoursInput.text.toString().trim(),
             description = descriptionInput.text.toString().trim(),
             lat = lat,
             lng = lng

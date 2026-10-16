@@ -6,6 +6,7 @@ data class MarketModel(
     var description: String = "",
     var county: String = "",
     var openingDays: String = "",
+    var openingHours: String = "",
     var lat: Double = 0.0,
     var lng: Double = 0.0
 )

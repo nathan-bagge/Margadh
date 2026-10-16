@@ -8,7 +8,7 @@
     <!-- Market list -->
     <string name="markets_title">Markets</string>
     <string name="market_title_format">%1$d: %2$s</string>
-    <string name="market_details_format">%1$s | Open: %2$s</string>
+    <string name="market_details_format">%1$s | Open: %2$s %3$s</string>
     <string name="market_coordinates_format">Lat: %1$s, Lng: %2$s</string>
 
     <!-- Delete dialog -->
@@ -21,7 +21,15 @@
     <string name="edit_market">Edit Market</string>
     <string name="hint_name">Market/Farm Name</string>
     <string name="hint_county">County</string>
-    <string name="hint_days">Opening days (e.g. Sat 9am-2pm)</string>
+    <string name="label_days">Opening days</string>
+    <string name="hint_hours">Opening hours (e.g. 9am-2pm)</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_sun">Sun</string>
     <string name="hint_description">Description</string>
     <string name="hint_lat">Latitude (e.g. 52.2593)</string>
     <string name="hint_lng">Longitude (e.g. -7.1101)</string>
