@@ -3,7 +3,6 @@ package org.setu.margadh.activities
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +34,10 @@ class AddEditActivity : AppCompatActivity() {
             insets
         }
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setTitle(R.string.add_market)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         nameInput = findViewById(R.id.nameInput)
         countyInput = findViewById(R.id.countyInput)
         daysInput = findViewById(R.id.daysInput)
@@ -43,14 +46,19 @@ class AddEditActivity : AppCompatActivity() {
         lngInput = findViewById(R.id.lngInput)
 
         findViewById<Button>(R.id.saveButton).setOnClickListener { saveMarket() }
-        findViewById<Button>(R.id.cancelButton).setOnClickListener { finish() }
 
         editingId = intent.getLongExtra("id", -1L)
 
         if (editingId != -1L) {
-            findViewById<TextView>(R.id.formTitle).text = getString(R.string.edit_market)
+            supportActionBar?.setTitle(R.string.edit_market)
             loadExistingMarket(editingId)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        Timber.i("Add/Edit closed by Up")
+        finish()
+        return true
     }
 
     private fun loadExistingMarket(id: Long) {
