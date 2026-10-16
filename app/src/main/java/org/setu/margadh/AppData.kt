@@ -1,7 +1,7 @@
 package org.setu.margadh
 
-import org.setu.margadh.models.MarketMemStore
+import org.setu.margadh.models.MarketStore
 
 object AppData {
-    val markets = MarketMemStore()
+    lateinit var markets: MarketStore
 }
