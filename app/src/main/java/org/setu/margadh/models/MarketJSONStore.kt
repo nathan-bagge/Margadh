@@ -49,6 +49,7 @@ class MarketJSONStore(context: Context) : MarketStore {
         found.description = market.description
         found.county = market.county
         found.openingDays = market.openingDays
+        found.openingHours = market.openingHours
         found.lat = market.lat
         found.lng = market.lng
         serialize()

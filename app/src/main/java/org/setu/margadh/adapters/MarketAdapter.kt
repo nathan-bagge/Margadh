@@ -41,7 +41,7 @@ class MarketAdapter(
         val context = holder.itemView.context
 
         holder.nameText.text = context.getString(R.string.market_title_format, market.id, market.name)
-        holder.detailsText.text = context.getString(R.string.market_details_format, market.county, market.openingDays)
+        holder.detailsText.text = context.getString(R.string.market_details_format, market.county, market.openingDays, market.openingHours)
         holder.descriptionText.text = market.description
         holder.coordinatesText.text = context.getString(R.string.market_coordinates_format, market.lat.toString(), market.lng.toString())
 
