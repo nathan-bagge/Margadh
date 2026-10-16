@@ -20,7 +20,7 @@
             android:id="@+id/mainTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Margadh"
+            android:text="@string/app_name"
             android:textAlignment="center"
             android:textSize="34sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="View Markets"
+            android:text="@string/view_markets"
             android:textSize="24sp" />
 
         <Button
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Add Market"
+            android:text="@string/add_market"
             android:textSize="24sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

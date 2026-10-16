@@ -7,7 +7,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import org.setu.margadh.R
 import android.content.Intent
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.setu.margadh.AppData
@@ -16,6 +15,8 @@ import org.setu.margadh.models.MarketModel
 import org.setu.margadh.adapters.OnMarketListener
 import androidx.appcompat.app.AlertDialog
 import timber.log.Timber
+import android.view.Menu
+import android.view.MenuItem
 
 class MarketListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -49,9 +50,9 @@ class MarketListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        findViewById<Button>(R.id.returnButton).setOnClickListener {
-            finish()
-        }
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setTitle(R.string.markets_title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {
@@ -60,6 +61,27 @@ class MarketListActivity : AppCompatActivity() {
             adapter.updateMarkets(AppData.markets.findAll())
             Timber.d("Showing ${AppData.markets.findAll().size} markets")
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_market_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_add -> {
+                Timber.i("Add tapped from toolbar")
+                startActivity(Intent(this, AddEditActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun editMarket(market: MarketModel) {
@@ -78,12 +100,12 @@ class MarketListActivity : AppCompatActivity() {
     private fun confirmDelete(market: MarketModel) {
         Timber.d("Asking to delete id=${market.id}")
         AlertDialog.Builder(this)
-            .setTitle("Delete market?")
-            .setMessage("\"${market.name}\" will be permanently removed.")
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(R.string.delete_title)
+            .setMessage(getString(R.string.delete_message, market.name))
+            .setPositiveButton(R.string.delete) { _, _ ->
                 deleteMarket(market)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 }

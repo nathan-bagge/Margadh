@@ -38,10 +38,12 @@ class MarketAdapter(
         position: Int) {
         val market = markets[position]
 
-        holder.nameText.text = "${market.id}: ${market.name}"
-        holder.detailsText.text = "${market.county} | Open: ${market.openingDays}"
+        val context = holder.itemView.context
+
+        holder.nameText.text = context.getString(R.string.market_title_format, market.id, market.name)
+        holder.detailsText.text = context.getString(R.string.market_details_format, market.county, market.openingDays)
         holder.descriptionText.text = market.description
-        holder.coordinatesText.text = "Lat: ${market.lat}, Lng: ${market.lng}"
+        holder.coordinatesText.text = context.getString(R.string.market_coordinates_format, market.lat.toString(), market.lng.toString())
 
         holder.itemView.setOnClickListener{
             Timber.d("Row tapped id=${market.id}")

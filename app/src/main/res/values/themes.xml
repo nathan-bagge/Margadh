@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Margadh" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/margadh_green</item>
+        <item name="colorOnPrimary">@color/margadh_offwhite</item>
+        <item name="colorPrimaryContainer">@color/margadh_green_light</item>
+        <item name="colorOnPrimaryContainer">@color/margadh_green</item>
     </style>
 
     <style name="Theme.Margadh" parent="Base.Theme.Margadh" />
