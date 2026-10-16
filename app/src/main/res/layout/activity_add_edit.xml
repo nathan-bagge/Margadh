@@ -33,13 +33,21 @@
                 android:hint="@string/hint_name"
                 android:inputType="text|textCapWords" />
 
-            <EditText
-                android:id="@+id/countyInput"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_county"
-                android:inputType="text|textCapWords" />
+                android:layout_marginVertical="8dp"
+                android:hint="@string/hint_county">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/countyInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    app:simpleItems="@array/counties" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
                 android:id="@+id/daysInput"

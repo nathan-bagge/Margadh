@@ -12,11 +12,12 @@ import org.setu.margadh.AppData
 import org.setu.margadh.R
 import org.setu.margadh.models.MarketModel
 import timber.log.Timber
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
 class AddEditActivity : AppCompatActivity() {
 
     private lateinit var nameInput: EditText
-    private lateinit var countyInput: EditText
+    private lateinit var countyInput: MaterialAutoCompleteTextView
     private lateinit var daysInput: EditText
     private lateinit var descriptionInput: EditText
     private lateinit var latInput: EditText
@@ -73,7 +74,7 @@ class AddEditActivity : AppCompatActivity() {
         }
 
         nameInput.setText(market.name)
-        countyInput.setText(market.county)
+        countyInput.setText(market.county, false) // false stops the dropdown from opening automatically when going to edit from the market list and filtering down to only the county that was previously entered
         daysInput.setText(market.openingDays)
         descriptionInput.setText(market.description)
         latInput.setText(market.lat.toString())
