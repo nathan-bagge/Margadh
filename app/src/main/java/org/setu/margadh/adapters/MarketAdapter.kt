@@ -1,3 +1,6 @@
+//References:
+//- Android Developers, String resources (Formatting strings): https://developer.android.com/guide/topics/resources/string-resource
+
 package org.setu.margadh.adapters
 
 import android.view.LayoutInflater
@@ -38,6 +41,7 @@ class MarketAdapter(
         position: Int) {
         val market = markets[position]
 
+        // Row text comes from string resources with numbered placeholders
         val context = holder.itemView.context
 
         holder.nameText.text = context.getString(R.string.market_title_format, market.id, market.name)

@@ -1,3 +1,7 @@
+//References:
+//- Android Developers, Build local unit tests: https://developer.android.com/training/testing/local-tests
+//- JUnit 4: https://junit.org/junit4/
+
 package org.setu.margadh.models
 
 import org.junit.Assert.assertEquals
@@ -12,7 +16,7 @@ class MarketMemStoreTest {
 
     private lateinit var store: MarketMemStore
 
-    // set up that runs before every test, so each one starts with a fresh store holding the same two markets.
+    // Runs before every test, so each test starts with a fresh store holding the same two markets
     @Before
     fun setUp() {
         store = MarketMemStore()

@@ -1,3 +1,9 @@
+//References:
+//- Android Developers, Set up the app bar: https://developer.android.com/develop/ui/views/components/appbar/setting-up
+//- Android Developers, Add menus: https://developer.android.com/develop/ui/views/components/menus
+//- Android Developers, Principles of navigation: https://developer.android.com/guide/navigation/principles
+//- Android Developers, Dialogs: https://developer.android.com/develop/ui/views/components/dialogs
+
 package org.setu.margadh.activities
 
 import android.os.Bundle
@@ -50,6 +56,7 @@ class MarketListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        // Use the layout's MaterialToolbar as the app bar "Set up the app bar"
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setTitle(R.string.markets_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -63,6 +70,7 @@ class MarketListActivity : AppCompatActivity() {
         }
     }
 
+    // Options menu inflated from XML and handled by item id "Add menus"
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_market_list, menu)
         return true
@@ -78,7 +86,7 @@ class MarketListActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
+    // Up returns to the existing previous screen, behaving the same as Back to menu "Principles of navigation"
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
@@ -97,6 +105,7 @@ class MarketListActivity : AppCompatActivity() {
         adapter.updateMarkets(AppData.markets.findAll())
     }
 
+    // AlertDialog.Builder pattern from Android Developers, "Dialogs"
     private fun confirmDelete(market: MarketModel) {
         Timber.d("Asking to delete id=${market.id}")
         AlertDialog.Builder(this)

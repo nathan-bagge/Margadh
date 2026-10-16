@@ -1,3 +1,9 @@
+//References:
+//- Android Developers, Set up the app bar: https://developer.android.com/develop/ui/views/components/appbar/setting-up
+//- Android Developers, Principles of navigation: https://developer.android.com/guide/navigation/principles
+//- Material Components, Menus (Dropdown menu): https://github.com/material-components/material-components-android/blob/master/docs/components/Menu.md
+//- Material Components, Chips (Filter chip): https://github.com/material-components/material-components-android/blob/master/docs/components/Chip.md
+
 package org.setu.margadh.activities
 
 import android.os.Bundle
@@ -20,7 +26,6 @@ class AddEditActivity : AppCompatActivity() {
 
     private lateinit var nameInput: EditText
     private lateinit var countyInput: MaterialAutoCompleteTextView
-
     private lateinit var dayChips: ChipGroup
     private lateinit var hoursInput: EditText
     private lateinit var descriptionInput: EditText
@@ -67,12 +72,14 @@ class AddEditActivity : AppCompatActivity() {
         return true
     }
 
+    // Read the checked filter chips in Mon-Sun order and join them
     private fun selectedDays(): String =
         (0 until dayChips.childCount)
             .map { dayChips.getChildAt(it) as Chip }
             .filter { it.isChecked }
             .joinToString(", ") { it.text }
 
+    // Reverse of selectedDays(): tick the chips that match the saved days when editing
     private fun selectDays(days: String) {
         val chosen = days.split(", ")
         for (i in 0 until dayChips.childCount) {
